@@ -1,8 +1,15 @@
 package hello.hellospring.domain;
 
+
+import javax.persistence.*;
+
+@Entity
 public class Member {
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;  // 시스템이 정해주는 id
+
+
     private String name; // 회원가입할때 적는 이름
 
     public Long getId() {

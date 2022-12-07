@@ -1,6 +1,7 @@
 package hello.hellospring.controller;
 
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import hello.hellospring.domain.Member;
 import hello.hellospring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,12 @@ import java.util.List;
 public class MemberController {
 
      private MemberService memberService;
-          @Autowired//생성자 호출  스프링이 스프링 컨테이너에 있는 memberservice와 연결
+          @Autowired //생성자 호출  스프링이 스프링 컨테이너에 있는 memberservice와 연결
          public MemberController(MemberService memberService)
          {
-             this.memberService = memberService;
+                          this.memberService = memberService;
+             System.out.println("memberService =" + memberService.getClass());
+
          }
 
          @GetMapping("/members/new")
@@ -31,11 +34,6 @@ public class MemberController {
               Member member = new Member();
               member.setName(form.getName());
               memberService.join(member);
-
-              System.out.println(("Member " + member.getName()));
-
-
-
               return "redirect:/";   //HOME화면으로 보내는 기능
          }
 
